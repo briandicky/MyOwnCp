@@ -14,6 +14,8 @@
 #include <errno.h>
 #include <unistd.h>
 
+#define __DEBUG__ 666
+
 #ifdef __DEBUG__
 #define printINT(x) printf("%s = %d\n", #x, (x));
 #define printSTR(x) printf("%s = %s\n", #x, (x));
@@ -91,8 +93,11 @@ int main(int argc, const char *argv[]) {
 
     /* Transfer data until we encounter end of input or an error */ 
     while( (numRead = read(inputFD, buf, BUF_SIZE)) > 0 ) {
-        if( write(outputFD, buf, numRead) != numRead )
-            errorExit("'%s': Failed to write this file\n", argv[2]); 
+        for( int i = 0 ; i < numRead ; i++ ) {
+            /* If the character is not '\0', then write it to the output file */
+            if( !(buf[i] == '\0') && write(outputFD, &buf[i], 1) );
+                 // write(outputFD, &buf[i], 1) );
+        }
     }
 
     close(inputFD);

@@ -95,8 +95,11 @@ int main(int argc, const char *argv[]) {
     while( (numRead = read(inputFD, buf, BUF_SIZE)) > 0 ) {
         for( int i = 0 ; i < numRead ; i++ ) {
             /* If the character is not '\0', then write it to the output file */
-            if( !(buf[i] == '\0') && write(outputFD, &buf[i], 1) );
-                 // write(outputFD, &buf[i], 1) );
+            if( !(buf[i] == '\0') && !write(outputFD, &buf[i], 1) )
+                errorExit("'%s': Failed to write this file\n", argv[2]);
+
+            if( (buf[i] == '\0' && !write(outputFD, "\0", 1) ) )
+                errorExit("'%s': Failed to write this file]n", argv[2]);
         }
     }
 

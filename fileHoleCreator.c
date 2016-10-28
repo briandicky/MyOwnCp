@@ -13,7 +13,7 @@ int main(void) {
     if( write(fd, buf1, 10) != 10 )
         fprintf(stderr, "buf1 write error\n");
 
-    if( lseek(fd, 30, SEEK_SET) == -1 )
+    if( lseek(fd, 16384, SEEK_SET) == -1 )
         fprintf(stderr, "lseek erroer\n");
 
     if( write(fd, buf2, 10) != 10 )

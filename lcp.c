@@ -14,8 +14,7 @@
 #include <errno.h>
 #include <unistd.h>
 
-#define __DEBUG__ 666
-
+/* The macros of printing funtions. */
 #ifdef __DEBUG__
 #define printINT(x) printf("%s = %d\n", #x, (x));
 #define printSTR(x) printf("%s = %s\n", #x, (x));
@@ -23,6 +22,7 @@
 #define printINT(x)
 #define printSRT(x)
 #endif
+/* End macros */
 
 #ifndef BUF_SIZE
 #define BUF_SIZE 1024
